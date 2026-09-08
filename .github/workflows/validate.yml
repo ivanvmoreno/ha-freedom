@@ -17,6 +17,7 @@ jobs:
         uses: "hacs/action@main"
         with:
           category: "integration"
+          ignore: "topics, description"
 
       - name: Set up Python
         uses: actions/setup-python@v5
