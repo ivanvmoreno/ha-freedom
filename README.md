@@ -1,7 +1,7 @@
 # Freedom.to Integration for Home Assistant
 
 <p align="center">
-  <img src="custom_components/freedom_to/brand/logo.png" alt="Freedom.to Logo" width="360">
+  <img src="custom_components/freedom_to/brand/icon.png" alt="Freedom.to Logo" width="160">
 </p>
 
 <p align="center">
