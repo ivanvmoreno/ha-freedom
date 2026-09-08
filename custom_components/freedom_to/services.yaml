@@ -1,0 +1,106 @@
+start_session:
+  name: Start Focus Session
+  description: Starts a new Freedom.to focus session.
+  fields:
+    duration:
+      name: Duration
+      description: Length of the focus session in minutes.
+      required: false
+      default: 25
+      example: 45
+      selector:
+        number:
+          min: 1
+          max: 1440
+          unit_of_measurement: minutes
+    filter_list_names:
+      name: Blocklists by Name
+      description: List of blocklist names to enable. If omitted and filter_list_ids is omitted, all blocklists are used.
+      required: false
+      example: ["Distracting Websites"]
+      selector:
+        object:
+    filter_list_ids:
+      name: Blocklist IDs
+      description: List of Freedom filter list IDs to block.
+      required: false
+      example: [1527877]
+      selector:
+        object:
+    device_names:
+      name: Devices by Name
+      description: List of device names to enforce session on. If omitted, all registered devices are targeted.
+      required: false
+      example: ["Iván’s MacBook Pro (2)"]
+      selector:
+        object:
+    device_ids:
+      name: Device IDs
+      description: List of device IDs to enforce session on.
+      required: false
+      example: [3848405]
+      selector:
+        object:
+    block_everything:
+      name: Block Entire Internet
+      description: Whether to completely block all internet access.
+      required: false
+      default: false
+      selector:
+        boolean:
+    block_apps:
+      name: Block Desktop Apps
+      description: Whether to block configured desktop applications.
+      required: false
+      default: false
+      selector:
+        boolean:
+
+end_all_sessions:
+  name: End All Active Sessions
+  description: Terminates all running focus sessions immediately.
+
+end_session:
+  name: End Session
+  description: Terminates a specific active session by ID, or the current active session if ID is omitted.
+  fields:
+    schedule_id:
+      name: Schedule ID
+      description: ID of the schedule/session to end.
+      required: false
+      example: 19124727
+      selector:
+        number:
+          min: 1
+
+set_locked_mode:
+  name: Set Locked Mode
+  description: Enables or disables Freedom's Locked Mode (prevents stopping sessions early).
+  fields:
+    enabled:
+      name: Enabled
+      description: Set true to enable Locked Mode or false to disable.
+      required: true
+      default: false
+      selector:
+        boolean:
+
+add_session_note:
+  name: Add Session Note
+  description: Adds a reflection note to the latest concluded session or a specific session by ID.
+  fields:
+    note:
+      name: Note
+      description: Text note or reflection for the session.
+      required: true
+      example: "Finished reviewing PRs and drafting docs."
+      selector:
+        text:
+    session_id:
+      name: Session ID
+      description: ID of the concluded session to annotate. If omitted, latest concluded session is updated.
+      required: false
+      example: 347550961
+      selector:
+        number:
+          min: 1
