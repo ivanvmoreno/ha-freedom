@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .const import DEFAULT_SCAN_INTERVAL, DOMAIN
+from .const import CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL, DOMAIN
 from .freedom_client import FreedomApiError, FreedomAuthError, FreedomClient
 
 _LOGGER = logging.getLogger(__name__)
@@ -26,18 +26,26 @@ class FreedomData:
         self.active_session: Optional[Dict[str, Any]] = None
         self.stats: Dict[str, Any] = {}
         self.latest_concluded_session: Optional[Dict[str, Any]] = None
+        # User input states for dashboard session launcher
+        self.selected_duration_minutes: int = 25
+        self.selected_blocklist_id: Optional[int] = None
 
 
 class FreedomDataUpdateCoordinator(DataUpdateCoordinator[FreedomData]):
     """Class to manage fetching Freedom.to data from the API."""
 
-    def __init__(self, hass: HomeAssistant, client: FreedomClient) -> None:
+    def __init__(
+        self,
+        hass: HomeAssistant,
+        client: FreedomClient,
+        scan_interval: int = DEFAULT_SCAN_INTERVAL,
+    ) -> None:
         """Initialize the coordinator."""
         super().__init__(
             hass,
             _LOGGER,
             name=DOMAIN,
-            update_interval=timedelta(seconds=DEFAULT_SCAN_INTERVAL),
+            update_interval=timedelta(seconds=scan_interval),
         )
         self.client = client
         self.data = FreedomData()
@@ -68,6 +76,9 @@ class FreedomDataUpdateCoordinator(DataUpdateCoordinator[FreedomData]):
             except Exception as err:
                 _LOGGER.debug("Could not fetch concluded sessions: %s", err)
 
+            prev_duration = self.data.selected_duration_minutes
+            prev_blocklist = self.data.selected_blocklist_id
+
             freedom_data = FreedomData()
             freedom_data.profile = profile
             freedom_data.devices = devices
@@ -76,6 +87,8 @@ class FreedomDataUpdateCoordinator(DataUpdateCoordinator[FreedomData]):
             freedom_data.active_session = active_session
             freedom_data.stats = stats
             freedom_data.latest_concluded_session = latest_concluded
+            freedom_data.selected_duration_minutes = prev_duration
+            freedom_data.selected_blocklist_id = prev_blocklist
 
             return freedom_data
 

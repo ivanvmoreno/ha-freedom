@@ -5,8 +5,13 @@ DOMAIN = "freedom_to"
 CONF_EMAIL = "email"
 CONF_PASSWORD = "password"
 
+CONF_TEMPLATES = "session_templates"
+CONF_DEFAULT_DURATION = "default_duration"
+CONF_SCAN_INTERVAL = "scan_interval"
+
 DEFAULT_NAME = "Freedom"
 DEFAULT_SCAN_INTERVAL = 30  # seconds
+DEFAULT_SESSION_DURATION = 25  # minutes
 
 # Service Names
 SERVICE_START_SESSION = "start_session"

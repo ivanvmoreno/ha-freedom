@@ -18,5 +18,46 @@
     "abort": {
       "already_configured": "This Freedom.to account is already configured."
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Freedom.to Configuration",
+        "menu_options": {
+          "general_settings": "General Settings (Duration & Polling)",
+          "add_template": "Add Session Template",
+          "manage_templates": "View / Delete Templates"
+        }
+      },
+      "general_settings": {
+        "title": "General Settings",
+        "data": {
+          "default_duration": "Default Session Duration (minutes)",
+          "scan_interval": "Update Polling Interval (seconds)"
+        }
+      },
+      "add_template": {
+        "title": "Create Session Template",
+        "description": "Configure a one-click session template button.",
+        "data": {
+          "name": "Template Name",
+          "duration": "Duration (minutes)",
+          "device_ids": "Devices to Enforce Session On",
+          "filter_list_ids": "Blocklists to Enable",
+          "block_everything": "Block Entire Internet",
+          "block_apps": "Block Desktop Applications"
+        }
+      },
+      "manage_templates": {
+        "title": "Manage Templates",
+        "description": "Select templates you wish to remove.",
+        "data": {
+          "delete_templates": "Select templates to delete"
+        }
+      }
+    },
+    "abort": {
+      "no_templates": "There are no existing templates to manage."
+    }
   }
 }
